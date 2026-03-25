@@ -27,7 +27,7 @@ git clone https://github.com/Tracer-Cloud/open-sre-agent
 cd open-sre-agent
 make install
 cp .env.example .env
-# run opensre onboard to configure your local LLM provider
+# either run opensre onboard or add ANTHROPIC_API_KEY / OPENAI_API_KEY to .env
 opensre onboard
 make local-grafana-live
 ```
@@ -43,7 +43,7 @@ make local-grafana-live
    Start here: [Bundled Local RCA Demo](docs/local-rca-demo.md)
 
 3. **Full Local Development Setup**
-   Run the LangGraph dev UI locally or connect your own integrations and systems.
+   Run the LangGraph dev UI locally or connect your own Datadog, AWS, Slack, and optional Grafana systems.
    Start here: [Full Local Setup Guide](SETUP.md)
 
 <p align="center">
