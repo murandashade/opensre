@@ -250,7 +250,7 @@
     }
   },
   "logo": {
-    "light": "/images/logo/tracer/opensre-docs-logo-light.svg",
-    "dark": "/images/logo/tracer/opensre-docs-logo-dark.svg"
+    "light": "/images/logo/tracer/opensre-docs-logo-dark.svg",
+    "dark": "/images/logo/tracer/opensre-docs-logo-light.svg"
   }
 }
