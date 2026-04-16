@@ -491,6 +491,15 @@ Thanks goes to these amazing people:
         </a>
     </td>
 		</tr>
+		<tr>
+            <td align="center">
+        <a href="https://github.com/aniruddhaadak80">
+            <img src="https://avatars.githubusercontent.com/u/127435065?v=4" width="100" alt="aniruddhaadak80"/>
+            <br />
+            <sub><b>aniruddhaadak80</b></sub>
+        </a>
+    </td>
+		</tr>
 	</tbody>
 </table>
 <!-- readme: contributors -end -->
