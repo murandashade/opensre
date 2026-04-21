@@ -88,14 +88,7 @@ class BaseTool(ABC):
             logger.warning("Tool '%s' is not available; skipping execution.", self.my_tool_name)
             return ToolResult(
                 success=False,
-                error=f"Tool '{self.my_tool_name}' is not currently available",
+                error=f"Tool '{self.my_tool_name}' is not available.",
             )
-        try:
-            params = self.extract_params(**kwargs)
-            return self.run(params)
-        except (KeyError, ValueError) as exc:
-            logger.error("Tool '%s' param error: %s", self.my_tool_name, exc)
-            return ToolResult(success=False, error=str(exc))
-        except Exception as exc:  # pylint: disable=broad-except
-            logger.exception("Tool '%s' raised an unexpected error.", self.my_tool_name)
-            return ToolResult(success=False, error=f"Unexpected error: {exc}")
+        params = self.extract_params(**kwargs)
+        return self.run(params)
