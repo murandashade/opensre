@@ -88,7 +88,9 @@ class BaseTool(ABC):
             logger.warning("Tool '%s' is not available; skipping execution.", self.my_tool_name)
             return ToolResult(
                 success=False,
-                error=f"Tool '{self.my_tool_name}' is not available.",
+                error=f"Tool '{self.my_tool_name}' is not available",
             )
+        # Log at debug level so individual tool runs are easy to trace locally.
+        logger.debug("Running tool '%s' with kwargs: %s", self.my_tool_name, kwargs)
         params = self.extract_params(**kwargs)
         return self.run(params)
