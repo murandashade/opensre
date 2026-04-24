@@ -90,7 +90,7 @@ class BaseTool(ABC):
                 success=False,
                 error=f"Tool '{self.my_tool_name}' is not available",
             )
-        # Log at debug level so individual tool runs are easy to trace locally.
-        logger.debug("Running tool '%s' with kwargs: %s", self.my_tool_name, kwargs)
+        # NOTE: log at debug level so we can trace param extraction issues locally
+        logger.debug("Tool '%s' extracting params from kwargs: %s", self.my_tool_name, list(kwargs.keys()))
         params = self.extract_params(**kwargs)
         return self.run(params)
