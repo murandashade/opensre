@@ -72,7 +72,8 @@ class ToolRegistry:
                     available.append(name)
             except Exception:  # noqa: BLE001
                 logger.exception("Error checking availability for tool '%s'.", name)
-        return available
+        # Return sorted list so output is deterministic and easier to scan
+        return sorted(available)
 
     def run(self, name: str, params: ToolParams) -> ToolResult:
         """Instantiate the named tool and execute it with *params*.
@@ -85,29 +86,10 @@ class ToolRegistry:
             A :class:`~opensre.tools.base.ToolResult` describing the outcome.
 
         Raises:
-            KeyError:  If no tool with *name* is registered.
-            RuntimeError: If the tool reports itself as unavailable.
+            KeyError: If no tool is registered under *name*.
         """
-        tool_cls = self._tools.get(name)
+        tool_cls = self.get(name)
         if tool_cls is None:
             raise KeyError(f"No tool registered under name '{name}'.")
-
-        if not tool_cls.is_available():
-            raise RuntimeError(
-                f"Tool '{name}' is not available in the current environment."
-            )
-
-        tool = tool_cls()
-        extracted = tool.extract_params(params)
-        logger.info("Running tool '%s'.", name)
-        return tool.run(extracted)
-
-    def __len__(self) -> int:
-        return len(self._tools)
-
-    def __contains__(self, name: str) -> bool:
-        return name in self._tools
-
-
-# Module-level default registry — import and use this in most cases.
-default_registry = ToolRegistry()
+        logger.debug("Running tool '%s' with params: %s", name, params)
+        return tool_cls().run(params)
