@@ -39,7 +39,9 @@ class ToolRegistry:
                 f"Tool class '{tool_cls.__name__}' must define a 'my_tool_name' attribute."
             )
         if name in self._tools:
-            logger.warning(
+            # NOTE: Changed from warning to error-level log so duplicate registrations
+            # are harder to miss during development/debugging.
+            logger.error(
                 "Tool '%s' is already registered; overwriting with %s.",
                 name,
                 tool_cls.__name__,
@@ -83,13 +85,4 @@ class ToolRegistry:
             params: A :class:`~opensre.tools.base.ToolParams` instance.
 
         Returns:
-            A :class:`~opensre.tools.base.ToolResult` describing the outcome.
-
-        Raises:
-            KeyError: If no tool is registered under *name*.
-        """
-        tool_cls = self.get(name)
-        if tool_cls is None:
-            raise KeyError(f"No tool registered under name '{name}'.")
-        logger.debug("Running tool '%s' with params: %s", name, params)
-        return tool_cls().run(params)
+            A :class:`~opens
